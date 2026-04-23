@@ -1,0 +1,52 @@
+package com.example.bankmanagement.Controller;
+
+import com.example.bankmanagement.AapiResponse.ApiResponse;
+import com.example.bankmanagement.Model.Customer;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
+@RestController
+@RequestMapping("/api/v1/customer")
+public class CustomerController {
+
+    ArrayList<Customer> customers = new ArrayList<>();
+
+    //BASIC CRUD ENDPOINTS
+    @GetMapping("/get")
+    public ArrayList<Customer> getTasks(){
+        return customers;
+    }
+
+    @PostMapping("/add")
+    public ApiResponse addTask(@RequestBody Customer customer){
+        for(Customer c: customers){
+            if(c.getId().equalsIgnoreCase(customer.getId()))
+                return new ApiResponse("Customer with this ID already exists");
+        }
+        customers.add(customer);
+        return new ApiResponse("Customer added successfully");
+    }
+
+    @PutMapping("/update/{id}")
+    public ApiResponse updateTask(@PathVariable String id, @RequestBody Customer customer){
+        for(int i = 0; i < customers.size(); i++){
+            if(customers.get(i).getId().equalsIgnoreCase(id)){
+                customers.set(i, customer);
+                return new ApiResponse("Customer updated successfully");
+            }
+        }
+        return new ApiResponse("Customer not found");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse deleteTask(@PathVariable String id){
+        for(int i = 0; i < customers.size(); i++){
+            if(customers.get(i).getId().equalsIgnoreCase(id)){
+                customers.remove(i);
+                return new ApiResponse("Customer deleted successfully");
+            }
+        }
+        return new ApiResponse("Customer not found");
+    }
+}
