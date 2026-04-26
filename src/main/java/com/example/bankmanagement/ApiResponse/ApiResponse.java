@@ -1,4 +1,4 @@
-package com.example.bankmanagement.dto;
+package com.example.bankmanagement.ApiResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.example.bankmanagement.Controller;
 
-import com.example.bankmanagement.dto.ApiResponse;
+import com.example.bankmanagement.ApiResponse.ApiResponse;
 import com.example.bankmanagement.Model.Customer;
 import com.example.bankmanagement.dto.AmountRequest;
 import org.springframework.web.bind.annotation.*;
